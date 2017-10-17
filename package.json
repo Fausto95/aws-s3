@@ -1,0 +1,41 @@
+{
+  "name": "react-s3",
+  "version": "1.0.4",
+  "description": "A React library for AWS S3 image upload",
+  "author": {
+    "name": "Faustino Kialungila"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --out-dir lib",
+    "clean": "rm -rf lib",
+    "prepublish": "npm run clean && npm run build"
+  },
+  "files": [
+    "lib",
+    "src",
+    "index.js"
+  ],
+  "keywords": [
+    "react",
+    "react-aws3",
+    "react-component",
+    "aws",
+    "s3",
+    "image",
+    "upload"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.134.0"
+  },
+  "devDependencies": {
+    "json-loader": "^0.5.7",
+    "webpack": "^3.8.1",
+    "babel-cli": "^6.24.0",
+    "babel-jest": "^19.0.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-stage-3": "^6.22.0"
+  }
+}
