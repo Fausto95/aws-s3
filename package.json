@@ -1,6 +1,6 @@
 {
   "name": "react-s3",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A React library for AWS S3 image upload",
   "author": {
     "name": "Faustino Kialungila"
