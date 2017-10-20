@@ -45,5 +45,32 @@ class ReactS3 {
                 });
         })
     }
+    static delete(fileName, config) {
+        const fd = new FormData();
+        const url = `https://${config.bucketName}.s3-${config.region}.amazonaws.com/photos/${fileName}`
+        fd.append('Date', xAmzDate)
+        fd.append('X-Amz-Date', xAmzDate);
+        fd.append('Authorization', Signature.getSignature(config, dateYMD, Policy.getPolicy(config)));
+        fd.append('Content-Type', 'text/plain')
+        return new Promise((resolve, reject) => {
+            fetch(url, {
+                    method: 'delete',
+                    headers: {
+                        fd
+                    }
+                })
+                .then(response => {
+                    if (response.ok && response.status >= 200 && response.status <= 299) {
+                        return resolve({
+                            ok: response.ok,
+                            status: response.status,
+                            message: 'File Deleted',
+                            fileName: fileName
+                        })
+                    }
+                })
+                .catch(err => reject(err))
+        })
+    }
 }
 export default ReactS3

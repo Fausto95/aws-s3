@@ -1,6 +1,6 @@
 {
   "name": "react-s3",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "A React library for AWS S3 image upload",
   "author": {
     "name": "Faustino Kialungila"
@@ -37,5 +37,12 @@
     "babel-jest": "^19.0.0",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-stage-3": "^6.22.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fausto95/react-s3"
+  },
+  "bugs": {
+    "url": "https://github.com/Fausto95/react-s3/issues"
   }
 }
