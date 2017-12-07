@@ -125,6 +125,8 @@ Defaults your bucket to `public-read` : http://docs.aws.amazon.com/AmazonS3/late
 
 ***Versions History***
 
+`Version 1.2.2`- Album bug fix plus async + await
+
 `Version 1.2` - Now supports delete method.
 
 `Version 1.1` - No more aws-sdk dependecies.

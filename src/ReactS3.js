@@ -23,26 +23,29 @@ class ReactS3 {
         fd.append('Policy', Policy.getPolicy(config))
         fd.append('X-Amz-Signature', Signature.getSignature(config, dateYMD, Policy.getPolicy(config)));
         fd.append("file", file);
-        return new Promise((resolve, reject) => {
-            fetch(url, {
+        return new Promise(async(resolve, reject) => {
+            const errorHandler = fn => {
+                return fn.then(data => [null, data])
+                    .catch(err => [err])
+            }
+            const uploadResult = async() => {
+                let err, result;
+                [err, result] = await errorHandler(fetch(url, {
                     method: 'post',
                     headers: {
                         fd
                     },
                     body: fd
+                }))
+                if (err) reject(err)
+                resolve({
+                    bucket: config.bucketName,
+                    key: `${config.albumName}/${file.name}`,
+                    location: `${url}${config.albumName}/${file.name}`,
+                    result: result
                 })
-                .then((done) => {
-                    if (done.ok && done.status >= 200 && done.status <= 299) {
-                        return resolve({
-                            bucket: config.bucketName,
-                            key: `${config.albumName}/${file.name}`,
-                            location: `${url}photos/${file.name}`
-                        })
-                    }
-                })
-                .catch((error) => {
-                    return reject(error);
-                });
+            }
+            uploadResult()
         })
     }
     static delete(fileName, config) {
@@ -52,24 +55,28 @@ class ReactS3 {
         fd.append('X-Amz-Date', xAmzDate);
         fd.append('Authorization', Signature.getSignature(config, dateYMD, Policy.getPolicy(config)));
         fd.append('Content-Type', 'text/plain')
-        return new Promise((resolve, reject) => {
-            fetch(url, {
+        return new Promise(async(resolve, reject) => {
+            const errorHandler = fn => {
+                return fn.then(data => [null, data])
+                    .catch(err => [err])
+            }
+            const deleteResult = async() => {
+                let err, result;
+                [err, result] = await errorHandler(fetch(url, {
                     method: 'delete',
                     headers: {
                         fd
                     }
+                }))
+                if (err) reject(err)
+                resolve({
+                    ok: result.ok,
+                    status: result.status,
+                    message: 'File Deleted',
+                    fileName: fileName
                 })
-                .then(response => {
-                    if (response.ok && response.status >= 200 && response.status <= 299) {
-                        return resolve({
-                            ok: response.ok,
-                            status: response.status,
-                            message: 'File Deleted',
-                            fileName: fileName
-                        })
-                    }
-                })
-                .catch(err => reject(err))
+            }
+            deleteResult()
         })
     }
 }
