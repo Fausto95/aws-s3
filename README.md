@@ -59,7 +59,7 @@ const config = {
 
 const filename = 'my-image.png'
 
-/* If the file that you want to delete it's in the your bucket's root folder, don't provide any albumName in the config object*/
+/* If the file that you want to delete it's in your bucket's root folder, don't provide any albumName in the config object */
 
 //In this case the file that we want to delete is in the folder 'photos' that we referred in the config object as the albumName
 
