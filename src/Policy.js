@@ -6,7 +6,7 @@ export default class Policy {
             return ({'expiration': dateISO,
             "conditions": [
                 {"bucket": keys.bucketName},
-                ["starts-with", "$key", `${keys.albumName}/`],
+                ["starts-with", "$key", `${keys.albumName ? keys.albumName + '/' : ''}`],
                 {"acl": "public-read"},
                 ["starts-with", "$Content-Type", "image/"],
                 {"x-amz-meta-uuid": "14365123651274"},

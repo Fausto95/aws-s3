@@ -9,7 +9,7 @@ import {
 class ReactS3 {
     static upload(file, config) {
         const fd = new FormData();
-        const key = `${config.albumName}/` + file.name;
+        const key = `${config.albumName ? config.albumName + '/' : ''}${file.name}`;
         const url = `https://${config.bucketName}.s3.amazonaws.com/`
         fd.append('key', key);
         fd.append('acl', 'public-read');
@@ -40,8 +40,8 @@ class ReactS3 {
                 if (err) reject(err)
                 resolve({
                     bucket: config.bucketName,
-                    key: `${config.albumName}/${file.name}`,
-                    location: `${url}${config.albumName}/${file.name}`,
+                    key: `${config.albumName ? config.albumName + '/' : ''}${file.name}`,
+                    location: `${url}${config.albumName ? config.albumName +'/' : ''}${file.name}`,
                     result: result
                 })
             }
@@ -50,7 +50,7 @@ class ReactS3 {
     }
     static delete(fileName, config) {
         const fd = new FormData();
-        const url = `https://${config.bucketName}.s3-${config.region}.amazonaws.com/${config.albumName}/${fileName}`
+        const url = `https://${config.bucketName}.s3-${config.region}.amazonaws.com/${config.albumName ? config.albumName + '/' : ''}${fileName}`
         fd.append('Date', xAmzDate)
         fd.append('X-Amz-Date', xAmzDate);
         fd.append('Authorization', Signature.getSignature(config, dateYMD, Policy.getPolicy(config)));
