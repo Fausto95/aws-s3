@@ -1,24 +1,24 @@
-import { dateISOString, xAmzDate, dateYMD } from './Date'
+import { dateISOString, xAmzDate, dateYMD } from './Date';
 
 export default class Policy {  
-    static getPolicy(config){
-        const policy = (keys, date, dateISO) =>  {
-            return ({'expiration': dateISO,
+    static getPolicy(config) {
+        const policy = () =>  {
+            return ({'expiration': dateISOString,
             "conditions": [
-                {"bucket": keys.bucketName},
-                ["starts-with", "$key", `${keys.albumName ? keys.albumName + '/' : ''}`],
+                {"bucket": config.bucketName},
+                ["starts-with", "$key", `${config.albumName ? config.albumName + '/' : ''}`],
                 {"acl": "public-read"},
                 ["starts-with", "$Content-Type", "image/"],
                 {"x-amz-meta-uuid": "14365123651274"},
                 {"x-amz-server-side-encryption": "AES256"},
                 ["starts-with", "$x-amz-meta-tag", ""],
-                {"x-amz-credential": `${keys.accessKeyId}/${dateYMD}/${keys.region}/s3/aws4_request`},
+                {"x-amz-credential": `${config.accessKeyId}/${dateYMD}/${config.region}/s3/aws4_request`},
                 {"x-amz-algorithm": "AWS4-HMAC-SHA256"},
                 {"x-amz-date":  xAmzDate}
             ]
-            })
-        }
-        const policyBase64 = new Buffer(JSON.stringify(policy(config, xAmzDate, dateISOString, dateYMD))).toString('base64').replace(/\n|\r/, '');
-        return policyBase64
-    }
-}
+            });
+        };
+        //Returns a base64 policy;
+        return new Buffer(JSON.stringify(policy())).toString('base64').replace(/\n|\r/, '');    
+    };
+};
