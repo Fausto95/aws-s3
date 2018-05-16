@@ -1,34 +1,44 @@
 # React AWS3
 
-ReactS3 is package for upload images to Amazon AWS S3
+S3FileUpload is libray for upload any type of files to Amazon AWS S3
 
 ```
 npm install --save react-s3
 ```
 
 
-# Examples
+# Examples Uploading An Image
 
 ## ***Uploading to S3***
-```javascript
-import ReactS3 from 'react-s3';
+
+```js
+import S3FileUpload from 'react-s3';
+
+//Optional Import
+import { uploadFile } from 'react-s3';
 
 const config = {
     bucketName: 'myBucket',
-    albumName: 'photos',
+    dirName: 'photos',
     region: 'eu-west-1',
     accessKeyId: 'ANEIFNENI4324N2NIEXAMPLE',
     secretAccessKey: 'cms21uMxçduyUxYjeg20+DEkgDxe6veFosBT7eUgEXAMPLE',
 }
 
-/*  Notice that if you don't provide an albumName, the file will be automatically uploaded to the root of your bucket */
+/*  Notice that if you don't provide a dirName, the file will be automatically uploaded to the root of your bucket */
 
 
 
-ReactS3.upload(file, config)
-.then((data) => console.log(data))
-.catch((err) => console.error(err))
+S3FileUpload
+    .uploadFile(file, config)
+    .then(data => console.log(data))
+    .catch(err => console.error(err))
 
+//** OR *//
+
+uploadFile(file, config)
+    .then(data => console.log(data))
+    .catch(err => console.error(err))
 
   /**
    * {
@@ -46,27 +56,34 @@ ReactS3.upload(file, config)
 
 In this case the file that we want to delete is in the folder 'photos'
 
-```javascript
-import ReactS3 from 'react-s3';
+```js
+import S3FileUpload from 'react-s3';
+import { deleteFile } from 'react-s3';
 
 const config = {
     bucketName: 'myBucket',
-    albumName: 'photos',
+    dirName: 'school-documents',
     region: 'eu-west-1',
     accessKeyId: 'ANEIFNENI4324N2NIEXAMPLE',
     secretAccessKey: 'cms21uMxçduyUxYjeg20+DEkgDxe6veFosBT7eUgEXAMPLE',
 }
 
-const filename = 'my-image.png'
+const filename = 'hello-world.pdf'
 
-/* If the file that you want to delete it's in your bucket's root folder, don't provide any albumName in the config object */
+/* If the file that you want to delete it's in your bucket's root folder, don't provide any dirName in the config object */
 
-//In this case the file that we want to delete is in the folder 'photos' that we referred in the config object as the albumName
+//In this case the file that we want to delete is in the folder 'photos' that we referred in the config object as the dirName
 
-ReactS3.delete(filename, config)
-.then((response) => console.log(response))
-.catch((err) => console.error(err))
+S3FileUpload
+    .deleteFile(filename, config)
+    .then(response => console.log(response))
+    .catch(err => console.error(err))
 
+ //** OR *//
+
+deleteFile(filename, config)
+    .then(response => console.log(response))
+    .catch(err => console.error(err))
 
   /**
    * {
@@ -74,7 +91,7 @@ ReactS3.delete(filename, config)
    *      ok: true,
           status: 204,
           message: 'File deleted',
-          fileName: 'my-image.png'
+          fileName: 'hello-world.pdf'
    *   }
    * }
    */
@@ -122,7 +139,7 @@ Defaults your bucket to `public-read` : http://docs.aws.amazon.com/AmazonS3/late
 
 1. `config`
   * `bucketName` **required** - Your S3 bucket
-  * `albumName` **required** - Your S3 folderName/albumName
+  * `dirName` **required** - Your S3 folderName/dirName
   * `region` **required** - Your S3 bucket's region
   * `accessKeyId` **required** - Your S3 `AccessKeyId`
   * `secretAccessKey` **required** - Your S3 `SecretAccessKey`
@@ -130,11 +147,13 @@ Defaults your bucket to `public-read` : http://docs.aws.amazon.com/AmazonS3/late
 
 ***Versions History***
 
-`Version 1.2.2`- Album bug fix plus async + await
+__Version 1.3.0__ - Support for any type of file
 
-`Version 1.2` - Now supports delete method.
+__Version 1.2.2__ - Album bug fix plus async + await
 
-`Version 1.1` - No more aws-sdk dependecies.
+__Version 1.2__ - Now supports delete method.
+
+__Version 1.1__ - No more aws-sdk dependecies.
 
 
 ## License

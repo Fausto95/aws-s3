@@ -1,13 +1,12 @@
 {
   "name": "react-s3",
-  "version": "1.2.4",
-  "description": "A React library for AWS S3 image upload",
+  "version": "1.3.0",
+  "description": "A React library for AWS S3 file upload",
   "author": {
     "name": "Faustino Kialungila"
   },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src --out-dir lib",
     "clean": "rm -rf lib",
     "prepublish": "npm run clean && npm run build"
@@ -23,7 +22,8 @@
     "react-component",
     "aws",
     "s3",
-    "image",
+    "file",
+    "file-upload",
     "upload"
   ],
   "license": "ISC",
