@@ -19,7 +19,7 @@ import { uploadFile } from 'react-s3';
 
 const config = {
     bucketName: 'myBucket',
-    dirName: 'photos',
+    dirName: 'photos', /* optional */
     region: 'eu-west-1',
     accessKeyId: 'ANEIFNENI4324N2NIEXAMPLE',
     secretAccessKey: 'cms21uMxçduyUxYjeg20+DEkgDxe6veFosBT7eUgEXAMPLE',
@@ -58,6 +58,8 @@ In this case the file that we want to delete is in the folder 'photos'
 
 ```js
 import S3FileUpload from 'react-s3';
+
+//Optional Import
 import { deleteFile } from 'react-s3';
 
 const config = {
@@ -102,7 +104,7 @@ deleteFile(filename, config)
 
 Doc: http://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Id": "http referer policy example",
