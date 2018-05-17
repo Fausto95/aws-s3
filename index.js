@@ -1,1 +1,1 @@
-module.exports = require('./lib/ReactS3');
+module.exports = require('./lib/S3Client');

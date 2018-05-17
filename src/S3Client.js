@@ -4,7 +4,7 @@ import { dateISOString, xAmzDate, dateYMD } from "./Date";
 import { throwError } from './ErrorThrower';
 
 
-class S3FileUpload {
+class S3Client {
     static async uploadFile(file, config) {
 
         // Error Thrower :x:
@@ -52,6 +52,10 @@ class S3FileUpload {
         });
     }
     static async deleteFile(fileName, config) {
+
+        // Error Thrower :x:
+        throwError(config, fileName)
+
         const fd = new FormData();
         const url = `https://${config.bucketName}.s3-${
             config.region
@@ -83,6 +87,6 @@ class S3FileUpload {
         });
     }
 }
-const { uploadFile, deleteFile } = S3FileUpload;
+const { uploadFile, deleteFile } = S3Client;
 export { uploadFile, deleteFile };
-export default S3FileUpload;
+export default S3Client;

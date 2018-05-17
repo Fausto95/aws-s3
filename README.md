@@ -1,9 +1,9 @@
-# React AWS3
+# S3Client AWS-S3
 
-S3FileUpload is libray for upload any type of files to Amazon AWS S3
+S3Client - A Javascript Library for AWS S3 File Upload
 
 ```
-npm install --save react-s3
+npm install --save aws-s3
 ```
 
 
@@ -12,10 +12,10 @@ npm install --save react-s3
 ## ***Uploading to S3***
 
 ```js
-import S3FileUpload from 'react-s3';
+import S3Client from 'aws-s3';
 
 //Optional Import
-import { uploadFile } from 'react-s3';
+import { uploadFile } from 'aws-s3';
 
 const config = {
     bucketName: 'myBucket',
@@ -29,7 +29,7 @@ const config = {
 
 
 
-S3FileUpload
+S3Client
     .uploadFile(file, config)
     .then(data => console.log(data))
     .catch(err => console.error(err))
@@ -57,10 +57,10 @@ uploadFile(file, config)
 In this case the file that we want to delete is in the folder 'photos'
 
 ```js
-import S3FileUpload from 'react-s3';
+import S3Client from 'aws-s3';
 
 //Optional Import
-import { deleteFile } from 'react-s3';
+import { deleteFile } from 'aws-s3';
 
 const config = {
     bucketName: 'myBucket',
@@ -76,7 +76,7 @@ const filename = 'hello-world.pdf'
 
 //In this case the file that we want to delete is in the folder 'photos' that we referred in the config object as the dirName
 
-S3FileUpload
+S3Client
     .deleteFile(filename, config)
     .then(response => console.log(response))
     .catch(err => console.error(err))
@@ -148,6 +148,8 @@ Defaults your bucket to `public-read` : http://docs.aws.amazon.com/AmazonS3/late
 
 
 ***Versions History***
+
+__Version 1.4.0__ - Renamed Project
 
 __Version 1.3.0__ - Support for any type of file
 
