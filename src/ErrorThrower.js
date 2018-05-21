@@ -1,6 +1,6 @@
 export const throwError = (
     { bucketName, region, accessKeyId, secretAccessKey, albumName },
-    file, fileName
+    file
 ) => {
     if (bucketName === null || bucketName === "")
         throw new Error(`Your bucketName cannot be empty `);
@@ -12,7 +12,4 @@ export const throwError = (
         throw new Error(`Must provide secretAccessKey`);
     if (!file)
         throw new Error(`File cannot be empty`);
-    if (!fileName)
-        throw new Error(`Must provide a filename in order to delete anything in your bucket`);
-};
-  
+};  

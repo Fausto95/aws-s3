@@ -53,9 +53,6 @@ class S3Client {
     }
     static async deleteFile(fileName, config) {
 
-        // Error Thrower :x:
-        throwError(config, fileName)
-
         const fd = new FormData();
         const url = `https://${config.bucketName}.s3-${
             config.region
