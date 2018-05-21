@@ -1,6 +1,6 @@
 {
   "name": "aws-s3",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "S3Client - A Javascript Library for AWS S3 File Upload",
   "author": {
     "name": "Faustino Kialungila"
