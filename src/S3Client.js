@@ -8,7 +8,7 @@ class S3Client {
     static async uploadFile(file, config) {
 
         // Error Thrower :x:
-        throwError(config, file)
+        throwError(config, file);
 
         const fd = new FormData();
         const key = `${config.dirName ? config.dirName + "/" : ""}${file.name}`;

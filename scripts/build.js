@@ -16,15 +16,15 @@ console.log('\n🌬️  Cleaning old modules...')
 
 exec('rimraf cjs esm umd')
 
-console.log('\n🏗️  Building ES modules...')
+console.log('\n🏗️  Generating ES modules...')
 
 exec(`rollup -c scripts/config.js -f es -o esm/${packageName}.js`)
 
-console.log('\n🏗️  Building CommonJS modules...')
+console.log('\n🏗️  Generating CommonJS modules...')
 
 exec(`rollup -c scripts/config.js -f cjs -o cjs/${packageName}.js`)
 
-console.log('\n🏗️  Building UMD modules...')
+console.log('\n🏗️  Generating UMD modules...')
 
 const varName = pascalCase(packageName)
 
