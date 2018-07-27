@@ -14,7 +14,7 @@ const packageName = require('../package').name
 
 console.log('\n🌬️  Cleaning old modules...')
 
-exec('rimraf cjs esm umd')
+exec('rm -rf cjs esm umd')
 
 console.log('\n🏗️  Generating ES modules...')
 
