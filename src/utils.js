@@ -15,11 +15,12 @@ export function  fetchWithProgress (url, opts={}, onProgress) {
         if( 200 <= e.currentTarget.status && 299 >= e.currentTarget.status ){
           let response ={
             ok: true,
+	    status: e.currentTarget.status,
             event: xhr
           };
           res(response)
         }else{
-          rej({ok:false, event: xhr})
+          rej({ok:false, status:e.currentTarget.status, event: xhr})
         }
       }
     };
