@@ -7,7 +7,6 @@
  */
 export function  fetchWithProgress (url, opts={}, onProgress) {
   return new Promise( (res, rej)=>{
-    debugger;
     let xhr = new XMLHttpRequest();
     xhr.open(opts.method || 'get', url, true);
     xhr.onreadystatechange = (e) => {
