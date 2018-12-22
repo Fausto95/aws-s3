@@ -922,8 +922,7 @@ var S3Client = function () {
                     switch (_context2.prev = _context2.next) {
                         case 0:
                             fd = new FormData();
-                            url = "https://" + config.bucketName + ".s3-" + config.region + ".amazonaws.com/" + (config.dirName ? config.dirName + "/" : "") + fileName;
-  			    url = "https://" + config.bucketName + ".s3" + (config.region ? "-" + config.region : "" ) + ".amazonaws.com/" + (config.dirName ? config.dirName + "/" : "") + fileName;
+							url = "https://" + config.bucketName + ".s3" + (config.region ? "-" + config.region : "" ) + ".amazonaws.com/" + (config.dirName ? config.dirName + "/" : "") + fileName;
 				    
                             fd.append("Date", xAmzDate);
                             fd.append("X-Amz-Date", xAmzDate);
