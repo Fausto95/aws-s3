@@ -54,7 +54,9 @@ class S3Client {
     static async deleteFile(fileName, config) {
 
         const fd = new FormData();
-        const url = `https://${config.bucketName}.s3.amazonaws.com/${
+        const url = `https://${config.bucketName}.s3${
+            config.region ? "-" + config.region  : ""
+            }.amazonaws.com/${
             config.dirName ? config.dirName + "/" : ""
             }${fileName}`;
         fd.append("Date", xAmzDate);
