@@ -12,7 +12,12 @@ class S3Client {
 
         const fd = new FormData();
         const key = `${config.dirName ? config.dirName + "/" : ""}${file.name}`;
-        const url = `https://${config.bucketName}.s3.amazonaws.com/`;
+        let url;
+        if (config.region.split('-')[0] === 'cn') {
+            url = `https://${config.bucketName}.s3.${config.region}.amazonaws.com.cn`;
+        } else {
+            url = `https://${config.bucketName}.s3.amazonaws.com`;
+        }
         fd.append("key", key);
         fd.append("acl", "public-read");
         fd.append("Content-Type", file.type);
