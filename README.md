@@ -149,6 +149,8 @@ Defaults your bucket to `public-read` : http://docs.aws.amazon.com/AmazonS3/late
 
 ***Versions History***
 
+__Version 1.5.6__ - Support for Aws-China - #30 #32
+
 __Version 1.5.5__ - CRA Bug Fix
 
 __Version 1.5.0__ - Bug fix & ES5 transpilation
