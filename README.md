@@ -135,7 +135,6 @@ Doc: http://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html
 ```
 
 
-
 Defaults your bucket to `public-read` : http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
 
 
