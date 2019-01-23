@@ -16,7 +16,7 @@ class S3Client {
         if (config.region.split('-')[0] === 'cn') {
             url = `https://${config.bucketName}.s3.${config.region}.amazonaws.com.cn`;
         } else {
-            url = `https://${config.bucketName}.s3.amazonaws.com`;
+            url = `https://${config.bucketName}.s3-${config.region}.amazonaws.com`;
         }
         fd.append("key", key);
         fd.append("acl", "public-read");
