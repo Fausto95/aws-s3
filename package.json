@@ -1,6 +1,6 @@
 {
   "name": "aws-s3",
-  "version": "1.5.6",
+  "version": "2.0.0",
   "description": "S3Client - A Javascript Library for AWS S3 File Upload",
   "author": {
     "name": "Faustino Kialungila"
@@ -35,7 +35,8 @@
     "upload",
     "vanillajs",
     "vue-aws3",
-    "vuejs"
+    "vuejs",
+    "typescript"
   ],
   "license": "MIT",
   "dependencies": {
