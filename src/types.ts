@@ -16,12 +16,12 @@ type GenericType = {
 
 type Conditions = [
   GenericType,
-  [string, string, string],
   GenericType,
-  [string, string, string],
+  string[],
+  string[],
+  string[],
   GenericType,
   GenericType,
-  [string, string, string],
   GenericType,
   GenericType,
   GenericType
