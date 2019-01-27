@@ -40,29 +40,20 @@ class S3Client {
       return Promise.resolve({
         bucket: this.config.bucketName,
         key: `${this.config.dirName ? this.config.dirName + "/" : ""}${file.name}`,
-        location: `${url}${this.config.dirName ? this.config.dirName + "/" : ""}${
+        location: `${url}/${this.config.dirName ? this.config.dirName + "/" : ""}${
           file.name
           }`,
         status: data.status
       });
     }
     public async deleteFile(fileName: string): Promise<DeleteResponse> {
-      const fd = new FormData();
       const url: string = `https://${this.config.bucketName}.s3-${
         this.config.region
         }.amazonaws.com/${
         this.config.dirName ? this.config.dirName + "/" : ""
-        }${fileName}`;;
-      fd.append("Date", xAmzDate);
-      fd.append("X-Amz-Date", xAmzDate);
-      fd.append(
-        "Authorization",
-        Signature.getSignature(this.config, dateYMD, Policy.getPolicy(this.config))
-      );
-      fd.append("Content-Type", "text/plain");
+        }${fileName}`;
 
-      const params = { method: "delete" };
-      const deleteResult = await fetch(url, params);
+      const deleteResult = await fetch(url, { method: "delete" });
       if (!deleteResult.ok) return Promise.reject(deleteResult);
       return Promise.resolve({
         ok: deleteResult.ok,

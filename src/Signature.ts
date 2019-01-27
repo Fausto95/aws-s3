@@ -2,7 +2,7 @@ import {IConfig, DateYMD} from "./types"
 import Crypto, { WordArray } from "crypto-js";
 
 export default class Signature {
-    public static getSignature(config: IConfig, date: DateYMD, policyBase64: any) {
+    public static getSignature(config: IConfig, date: DateYMD, policyBase64: string): string {
         const getSignatureKey = (key: string, dateStamp: DateYMD, regionName: string): WordArray => {
             const kDate: WordArray = Crypto.HmacSHA256(dateStamp, "AWS4" + key);
             const kRegion: WordArray = Crypto.HmacSHA256(regionName, kDate);

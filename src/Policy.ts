@@ -1,4 +1,4 @@
-import { dateISOString, xAmzDate, dateYMD } from "./Date";
+import { dateISOString, dateYMD, xAmzDate } from "./Date";
 import { IConfig, Policy as PolicyType } from "./types";
 
 export default class Policy {
@@ -7,20 +7,20 @@ export default class Policy {
       return {
         expiration: dateISOString,
         conditions: [
+          { acl: "public-read" },
           { bucket: config.bucketName },
           ["starts-with", "$key", `${config.dirName ? config.dirName + "/" : ""}`],
-          { acl: "public-read" },
           ["starts-with", "$Content-Type", ""],
-          { "x-amz-meta-uuid": "14365123651274" },
-          { "x-amz-server-side-encryption": "AES256" },
           ["starts-with", "$x-amz-meta-tag", ""],
+          { "x-amz-algorithm": "AWS4-HMAC-SHA256" },
           {
             "x-amz-credential": `${config.accessKeyId}/${dateYMD}/${
-                config.region
-                }/s3/aws4_request`
+              config.region
+            }/s3/aws4_request`
           },
-          { "x-amz-algorithm": "AWS4-HMAC-SHA256" },
-          { "x-amz-date": xAmzDate }
+          { "x-amz-date": xAmzDate },
+          { "x-amz-meta-uuid": "14365123651274" },
+          { "x-amz-server-side-encryption": "AES256" }
         ]
       };
     };
