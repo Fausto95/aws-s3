@@ -15,7 +15,7 @@ class S3Client {
 
       const fd = new FormData();
       const key: string = `${this.config.dirName ? this.config.dirName + "/" : ""}${file.name}`;
-      const url: string = GetUrl(this.config.region.split("-")[0], this.config.bucketName, this.config.region);
+      const url: string = GetUrl(this.config);
       fd.append("key", key);
       fd.append("acl", "public-read");
       fd.append("Content-Type", file.type);
