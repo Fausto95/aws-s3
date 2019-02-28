@@ -1,9 +1,7 @@
 import { IConfig } from "./types";
 
-const buildUrl = (config: IConfig): string => {
-  const countryCode = config.region.split("-")[0]
-  const bucketName = config.bucketName
-  const region = config.region
+const buildUrl = ({bucketName, region}: IConfig): string => {
+  const countryCode = region.split("-")[0];
 
   switch (countryCode) {
     case "cn":
