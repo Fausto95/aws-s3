@@ -10,11 +10,11 @@ class S3Client {
     constructor(config: IConfig) {
       this.config = config;
     }
-    public async uploadFile(file: File): Promise<UploadResponse> {
+    public async uploadFile(file: File, newFileName: string): Promise<UploadResponse> {
       throwError(this.config, file);
 
       const fd = new FormData();
-      const key: string = `${this.config.dirName ? this.config.dirName + "/" : ""}${file.name}`;
+      const key: string = `${this.config.dirName ? this.config.dirName + "/" : ""}${newFileName? newFileName : file.name}`;
       const url: string = GetUrl(this.config);
       fd.append("key", key);
       fd.append("acl", "public-read");
@@ -39,10 +39,8 @@ class S3Client {
       if (!data.ok) return Promise.reject(data);
       return Promise.resolve({
         bucket: this.config.bucketName,
-        key: `${this.config.dirName ? this.config.dirName + "/" : ""}${file.name}`,
-        location: `${url}/${this.config.dirName ? this.config.dirName + "/" : ""}${
-          file.name
-          }`,
+        key: `${this.config.dirName ? this.config.dirName + "/" : ""}${newFileName? newFileName : file.name}`,
+        location: `${url}/${this.config.dirName ? this.config.dirName + "/" : ""}${newFileName? newFileName : file.name}`,
         status: data.status
       });
     }
