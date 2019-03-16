@@ -26,10 +26,11 @@ const config = {
 const S3Client = new S3(config);
 /*  Notice that if you don't provide a dirName, the file will be automatically uploaded to the root of your bucket */
 
-
+/* This is optional */
+const newFileName = 'my-awesome-file';
 
 S3Client
-    .uploadFile(file)
+    .uploadFile(file, newFileName)
     .then(data => console.log(data))
     .catch(err => console.error(err))
 
