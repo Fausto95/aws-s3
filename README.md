@@ -12,10 +12,7 @@ npm install --save aws-s3
 ## ***Uploading to S3***
 
 ```js
-import S3Client from 'aws-s3';
-
-//Optional Import
-import { uploadFile } from 'aws-s3';
+import S3 from 'aws-s3';
 
 const config = {
     bucketName: 'myBucket',
@@ -23,20 +20,17 @@ const config = {
     region: 'eu-west-1',
     accessKeyId: 'ANEIFNENI4324N2NIEXAMPLE',
     secretAccessKey: 'cms21uMxçduyUxYjeg20+DEkgDxe6veFosBT7eUgEXAMPLE',
+    s3Url: 'https://my-s3-url.com/', /* optional */
 }
 
+const S3Client = new S3(config);
 /*  Notice that if you don't provide a dirName, the file will be automatically uploaded to the root of your bucket */
 
-
+/* This is optional */
+const newFileName = 'my-awesome-file';
 
 S3Client
-    .uploadFile(file, config)
-    .then(data => console.log(data))
-    .catch(err => console.error(err))
-
-//** OR *//
-
-uploadFile(file, config)
+    .uploadFile(file, newFileName)
     .then(data => console.log(data))
     .catch(err => console.error(err))
 
@@ -57,10 +51,8 @@ uploadFile(file, config)
 In this case the file that we want to delete is in the folder 'photos'
 
 ```js
-import S3Client from 'aws-s3';
+import S3 from 'aws-s3';
 
-//Optional Import
-import { deleteFile } from 'aws-s3';
 
 const config = {
     bucketName: 'myBucket',
@@ -68,22 +60,19 @@ const config = {
     region: 'eu-west-1',
     accessKeyId: 'ANEIFNENI4324N2NIEXAMPLE',
     secretAccessKey: 'cms21uMxçduyUxYjeg20+DEkgDxe6veFosBT7eUgEXAMPLE',
+    s3Url: 'https://my-s3-url.com/', /* optional */
 }
 
-const filename = 'hello-world.pdf'
+const S3Client = new S3(config);
+
+const filename = 'hello-world.pdf';
 
 /* If the file that you want to delete it's in your bucket's root folder, don't provide any dirName in the config object */
 
 //In this case the file that we want to delete is in the folder 'photos' that we referred in the config object as the dirName
 
 S3Client
-    .deleteFile(filename, config)
-    .then(response => console.log(response))
-    .catch(err => console.error(err))
-
- //** OR *//
-
-deleteFile(filename, config)
+    .deleteFile(filename)
     .then(response => console.log(response))
     .catch(err => console.error(err))
 
@@ -134,35 +123,15 @@ Doc: http://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html
 }
 ```
 
-
-
 Defaults your bucket to `public-read` : http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
 
-
-1. `config`
+`config`
   * `bucketName` **required** - Your S3 bucket
   * `dirName` **required** - Your S3 folderName/dirName
   * `region` **required** - Your S3 bucket's region
   * `accessKeyId` **required** - Your S3 `AccessKeyId`
   * `secretAccessKey` **required** - Your S3 `SecretAccessKey`
-
-
-***Versions History***
-
-__Version 1.5.5__ - CRA Bug Fix
-
-__Version 1.5.0__ - Bug fix & ES5 transpilation
-
-__Version 1.4.0__ - Renamed Project
-
-__Version 1.3.0__ - Support for any type of file
-
-__Version 1.2.2__ - Album bug fix plus async + await
-
-__Version 1.2__ - Now supports delete method.
-
-__Version 1.1__ - No more aws-sdk dependecies.
-
+  * `s3Url` **optional** - Your S3 URL
 
 ## License
 
