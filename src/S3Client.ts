@@ -1,3 +1,4 @@
+import shortId from 'short-uuid';
 import { dateYMD, xAmzDate } from "./Date";
 import { IConfig, DeleteResponse, UploadResponse } from "./types";
 import { throwError } from "./ErrorThrower";
@@ -15,7 +16,9 @@ class S3Client {
       throwError(this.config, file);
 
       const fd = new FormData();
-      const key: string = `${this.config.dirName ? this.config.dirName + "/" : ""}${newFileName? newFileName : file.name}`;
+      const fileExtension: string = file.type.split('/')[1];
+      const fileName: string = `${newFileName || shortId.generate()}.${fileExtension}`;
+      const key: string = `${this.config.dirName ? this.config.dirName + "/" : ""}${fileName}`;
       const url: string = GetUrl(this.config);
       fd.append("key", key);
       fd.append("acl", "public-read");
@@ -40,8 +43,8 @@ class S3Client {
       if (!data.ok) return Promise.reject(data);
       return Promise.resolve({
         bucket: this.config.bucketName,
-        key: `${this.config.dirName ? this.config.dirName + "/" : ""}${newFileName? newFileName : file.name}`,
-        location: `${url}/${this.config.dirName ? this.config.dirName + "/" : ""}${newFileName? newFileName : file.name}`,
+        key: `${this.config.dirName ? this.config.dirName + "/" : ""}${fileName}`,
+        location: `${url}/${this.config.dirName ? this.config.dirName + "/" : ""}${fileName}`,
         status: data.status
       });
     }

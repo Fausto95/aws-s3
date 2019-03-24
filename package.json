@@ -1,6 +1,6 @@
 {
   "name": "aws-s3",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "S3Client - A Javascript Library for AWS S3 File Upload",
   "author": {
     "name": "Faustino Kialungila"
@@ -40,9 +40,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "child_process": "^1.0.2",
     "crypto-js": "^3.1.9-1",
-    "path": "^0.12.7"
+    "short-uuid": "^3.1.0"
   },
   "devDependencies": {
     "@types/crypto-js": "^3.1.43",
