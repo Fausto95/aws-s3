@@ -5,7 +5,7 @@ import { throwError } from './ErrorThrower';
 import {fetchWithProgress} from './utils';
 
 class S3Client {
-    static async uploadFile(file, config) {
+    static async uploadFile(file, config, progressCb) {
 
         // Error Thrower :x:
         throwError(config, file);
@@ -40,7 +40,7 @@ class S3Client {
             body: fd
         };
 
-        const data = await fetchWithProgress(url, params);
+        const data = await fetchWithProgress(url, params, progressCb);
         if (!data.ok) return Promise.reject(data);
         return Promise.resolve({
             bucket: config.bucketName,
@@ -74,7 +74,7 @@ class S3Client {
             }
         };
 
-        const deleteResult = await fetchWithProgress(url, params);
+        const deleteResult = await fetch(url, params);
         if (!deleteResult.ok) return Promise.reject(deleteResult);
         return Promise.resolve({
             ok: deleteResult.ok,
