@@ -11,7 +11,7 @@ class S3Client {
     constructor(config: IConfig) {
       this.config = config;
     }
-    public async uploadFile(file: File, newFileName: string, progressCb: any ): Promise<UploadResponse> {
+    public async uploadFile(file: File, newFileName: string, progressCb:  ((this: XMLHttpRequest, ev: ProgressEvent) => any) ): Promise<UploadResponse> {
       throwError(this.config, file);
 
       const fd = new FormData();
