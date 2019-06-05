@@ -1,3 +1,4 @@
+import { IConfig } from "./types";
 
 export default (countryCode: string, bucketName: string, region: string): string => {
   if(countryCode === "cn"){
@@ -7,4 +8,11 @@ export default (countryCode: string, bucketName: string, region: string): string
   }else{
     return `https://${bucketName}.s3-${region}.amazonaws.com`;
   }
+}
+
+export default (config: IConfig): string => {
+  if (config.s3Url && config.s3Url !== '') {
+    return config.s3Url;
+  }
+  return buildUrl(config);
 }

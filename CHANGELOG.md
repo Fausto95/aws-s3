@@ -1,9 +1,12 @@
-Version 2.0.1
+Current Version `2.0.5`
 # Changelog
-All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+[2.0.5]: Unique identifier(filename) to avoid replacing files with same name
+
+[2.0.4]: Optional filename for uploading
+
+[2.0.3]: Custom S3 URL Support
 
 [2.0.2]: Fix deleteFile issue where missing region in url causes error.
 

@@ -1,3 +1,4 @@
+import shortId from 'short-uuid';
 import { dateYMD, xAmzDate } from "./Date";
 import { IConfig, DeleteResponse, UploadResponse } from "./types";
 import { throwError } from "./ErrorThrower";
@@ -10,12 +11,14 @@ class S3Client {
     constructor(config: IConfig) {
       this.config = config;
     }
-    public async uploadFile(file: File): Promise<UploadResponse> {
+    public async uploadFile(file: File, newFileName?: string): Promise<UploadResponse> {
       throwError(this.config, file);
 
       const fd = new FormData();
-      const key: string = `${this.config.dirName ? this.config.dirName + "/" : ""}${file.name}`;
-      const url: string = GetUrl(this.config.region.split("-")[0], this.config.bucketName, this.config.region);
+      const fileExtension: string = file.type.split('/')[1];
+      const fileName: string = `${newFileName || shortId.generate()}.${fileExtension}`;
+      const key: string = `${this.config.dirName ? this.config.dirName + "/" : ""}${fileName}`;
+      const url: string = GetUrl(this.config);
       fd.append("key", key);
       fd.append("acl", "public-read");
       fd.append("Content-Type", file.type);
@@ -39,10 +42,8 @@ class S3Client {
       if (!data.ok) return Promise.reject(data);
       return Promise.resolve({
         bucket: this.config.bucketName,
-        key: `${this.config.dirName ? this.config.dirName + "/" : ""}${file.name}`,
-        location: `${url}/${this.config.dirName ? this.config.dirName + "/" : ""}${
-          file.name
-          }`,
+        key: `${this.config.dirName ? this.config.dirName + "/" : ""}${fileName}`,
+        location: `${url}/${this.config.dirName ? this.config.dirName + "/" : ""}${fileName}`,
         status: data.status
       });
     }

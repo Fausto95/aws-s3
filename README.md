@@ -20,15 +20,17 @@ const config = {
     region: 'eu-west-1',
     accessKeyId: 'ANEIFNENI4324N2NIEXAMPLE',
     secretAccessKey: 'cms21uMxçduyUxYjeg20+DEkgDxe6veFosBT7eUgEXAMPLE',
+    s3Url: 'https://my-s3-url.com/', /* optional */
 }
 
 const S3Client = new S3(config);
 /*  Notice that if you don't provide a dirName, the file will be automatically uploaded to the root of your bucket */
 
-
+/* This is optional */
+const newFileName = 'my-awesome-file';
 
 S3Client
-    .uploadFile(file)
+    .uploadFile(file, newFileName)
     .then(data => console.log(data))
     .catch(err => console.error(err))
 
@@ -58,6 +60,7 @@ const config = {
     region: 'eu-west-1',
     accessKeyId: 'ANEIFNENI4324N2NIEXAMPLE',
     secretAccessKey: 'cms21uMxçduyUxYjeg20+DEkgDxe6veFosBT7eUgEXAMPLE',
+    s3Url: 'https://my-s3-url.com/', /* optional */
 }
 
 const S3Client = new S3(config);
@@ -120,10 +123,7 @@ Doc: http://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html
 }
 ```
 
-
-
 Defaults your bucket to `public-read` : http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html
-
 
 `config`
   * `bucketName` **required** - Your S3 bucket
@@ -131,6 +131,7 @@ Defaults your bucket to `public-read` : http://docs.aws.amazon.com/AmazonS3/late
   * `region` **required** - Your S3 bucket's region
   * `accessKeyId` **required** - Your S3 `AccessKeyId`
   * `secretAccessKey` **required** - Your S3 `SecretAccessKey`
+  * `s3Url` **optional** - Your S3 URL
 
 ## License
 
