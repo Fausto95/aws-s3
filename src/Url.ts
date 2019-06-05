@@ -1,6 +1,7 @@
 import { IConfig } from "./types";
 
-const buildUrl =  ({countryCode, bucketName, region}: IConfig): string => {
+const buildUrl =  ({bucketName, region}: IConfig): string => {
+  const countryCode = region.split("-")[0];
   if(countryCode === "cn"){
      return `https://${bucketName}.s3.${region}.amazonaws.com.${countryCode}`;
   }else if(region === "us-east-1"){
