@@ -5,13 +5,14 @@ import { throwError } from "./ErrorThrower";
 import GetUrl from "./Url";
 import Policy from "./Policy";
 import Signature from "./Signature";
+import {fetchWithProgress} from "./utils";
 
 class S3Client {
     private config: IConfig;
     constructor(config: IConfig) {
       this.config = config;
     }
-    public async uploadFile(file: File, newFileName?: string): Promise<UploadResponse> {
+    public async uploadFile(file: File, newFileName: string, progressCb:  ((this: XMLHttpRequest, ev: ProgressEvent) => any) ): Promise<UploadResponse> {
       throwError(this.config, file);
 
       const fd = new FormData();
@@ -38,7 +39,7 @@ class S3Client {
       );
       fd.append("file", file);
 
-      const data = await fetch(url, { method: "post", body: fd });
+      const data = await fetchWithProgress(url, { method: "post", body: fd }, progressCb);
       if (!data.ok) return Promise.reject(data);
       return Promise.resolve({
         bucket: this.config.bucketName,
