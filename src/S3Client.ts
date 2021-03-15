@@ -15,7 +15,7 @@ class S3Client {
       throwError(this.config, file);
 
       const fd = new FormData();
-      const fileExtension: string = file.type.split('/')[1];
+      const fileExtension: string = file.extension;
       const fileName: string = `${newFileName || shortId.generate()}.${fileExtension}`;
       const key: string = `${this.config.dirName ? this.config.dirName + "/" : ""}${fileName}`;
       const url: string = GetUrl(this.config);
