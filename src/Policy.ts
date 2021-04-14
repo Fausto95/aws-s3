@@ -7,7 +7,7 @@ export default class Policy {
       return {
         expiration: dateISOString,
         conditions: [
-          { acl: "public-read" },
+          { acl: config.acl?config.acl:"public-read" },
           { bucket: config.bucketName },
           ["starts-with", "$key", `${config.dirName ? config.dirName + "/" : ""}`],
           ["starts-with", "$Content-Type", ""],
