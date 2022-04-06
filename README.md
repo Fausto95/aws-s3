@@ -1,3 +1,7 @@
+🚨🚨🚨 STALE 🚨🚨🚨
+
+> While this library might still work, I'm no longer maintaining it. Feel free to fork and patch if needed.
+
 # S3Client AWS-S3
 
 S3Client - A Javascript Library for AWS S3 File Upload
